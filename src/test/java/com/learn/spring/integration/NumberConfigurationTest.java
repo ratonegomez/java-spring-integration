@@ -1,6 +1,5 @@
 package com.learn.spring.integration;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,8 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.stream.IntStream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -19,8 +20,8 @@ public class NumberConfigurationTest {
 
     @Test
     public void sendSimpleMessage(){
-        final Message<Integer> message= MessageBuilder.withPayload(2).build();
-        producer.send(message); 
+        final Message<int []> message= MessageBuilder.withPayload(IntStream.rangeClosed(1,10).toArray()).build();
+        producer.send(message);
     }
 
 }
