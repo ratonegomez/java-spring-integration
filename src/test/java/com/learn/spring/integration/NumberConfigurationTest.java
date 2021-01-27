@@ -1,27 +1,25 @@
 package com.learn.spring.integration;
 
+import java.util.stream.IntStream;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.integration.support.MessageBuilder;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageChannel;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.stream.IntStream;
+import com.learn.spring.integration.service.NumberService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class NumberConfigurationTest {
 
     @Autowired
-    private MessageChannel producer;
+    private NumberService numberService;
 
     @Test
     public void sendSimpleMessage(){
-        final Message<int []> message= MessageBuilder.withPayload(IntStream.rangeClosed(1,10).toArray()).build();
-        producer.send(message);
+        numberService.send(IntStream.rangeClosed(1,10).toArray());        
     }
 
 }
